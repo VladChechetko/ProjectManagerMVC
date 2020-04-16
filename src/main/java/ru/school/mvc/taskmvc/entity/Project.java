@@ -13,10 +13,14 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author Denis Volnenko
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Project implements Serializable {
 
 	@Id
@@ -34,6 +38,7 @@ public class Project implements Serializable {
     private String description;
     
     @OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+    @JsonIgnore
     private List<Task> taskList;
     
     public Long getId() {
