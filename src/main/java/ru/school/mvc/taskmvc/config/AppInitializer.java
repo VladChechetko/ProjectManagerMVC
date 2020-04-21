@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages = "ru.school.mvc.taskmvc")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "ru.school.mvc.taskmvc.repository")
+@EnableJpaRepositories(basePackages = {"ru.school.mvc.taskmvc.repository","ru.school.mvc.taskmvc.security.repository"})
 public class AppInitializer {
 
     @Bean
@@ -37,7 +37,7 @@ public class AppInitializer {
         factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        factoryBean.setPackagesToScan("ru.school.mvc.taskmvc.entity");
+        factoryBean.setPackagesToScan(new String[]{"ru.school.mvc.taskmvc.entity","ru.school.mvc.taskmvc.security.entity"});
         final Properties properties = new Properties();
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.hbm2ddl.auto", "update");
